@@ -1,8 +1,9 @@
 {
   "name": "سوق الأصول الرقمية",
   "short_name": "سوق الأصول",
-  "start_url": "/assets-market/",
-  "scope": "/assets-market/",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#4f46e5",
