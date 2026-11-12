@@ -1,0 +1,15 @@
+{
+  "name": "سوق الأصول الرقمية",
+  "short_name": "سوق الأصول",
+  "start_url": "/assets-market/",
+  "scope": "/assets-market/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4f46e5",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": [
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
