@@ -14,7 +14,7 @@ input{width:100%;padding:10px;border-radius:8px;border:0;margin-top:8px;box-sizi
 #list{padding:0 12px 24px;display:grid;gap:10px}
 .card{background:#fff;border-radius:12px;padding:14px}
 .card h3{margin:0 0 6px}
-.price{color:#4f46e5;font-weight:bold}
+.price{color:#4f46e5;font-weight:bold;margin-top:6px}
 </style>
 </head>
 <body>
@@ -27,7 +27,10 @@ input{width:100%;padding:10px;border-radius:8px;border:0;margin-top:8px;box-sizi
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script>
-const db = supabase.createClient('PROJECT_URL', 'ANON_KEY');
+const db = supabase.createClient(
+  'https://lzokcvfbbyshowujewfd.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx6b2tjdmZiYnlzaG93dWpld2ZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ0OTk3MzQsImV4cCI6MjExMDA3NTczNH0._AUiEWtMrq9c_9v_8j1pIZeLyNIWaYVaFaujW80LFss'
+);
 let cat = null, q = '';
 
 function el(tag, cls, text){
@@ -37,25 +40,25 @@ function el(tag, cls, text){
   return e;
 }
 
+function pick(id, node){
+  cat = id;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
+  node.classList.add('on');
+  loadAssets();
+}
+
 async function loadCats(){
   const { data } = await db.from('categories').select('*');
   const box = document.getElementById('cats');
   box.innerHTML = '';
   const all = el('div', 'chip on', 'الكل');
-  all.onclick = () => pick(null);
+  all.onclick = () => pick(null, all);
   box.append(all);
   (data || []).forEach(c => {
     const chip = el('div', 'chip', c.icon + ' ' + c.name);
-    chip.onclick = () => pick(c.id);
+    chip.onclick = () => pick(c.id, chip);
     box.append(chip);
   });
-}
-
-function pick(id){
-  cat = id;
-  document.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
-  event.currentTarget.classList.add('on');
-  loadAssets();
 }
 
 async function loadAssets(){
