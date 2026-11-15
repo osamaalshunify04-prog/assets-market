@@ -2,14 +2,14 @@ name: build
 on: [push, workflow_dispatch]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
         with: { distribution: temurin, java-version: '17' }
       - uses: subosito/flutter-action@v2
         with: { channel: stable, cache: true }
-      - run: flutter create --platforms=android,web --org com.yourname .
+      - run: flutter create --platforms=android,web --org com.yourname --project-name assets_market .
       - run: flutter pub get
       - run: flutter build apk --release
       - run: flutter build web --release
