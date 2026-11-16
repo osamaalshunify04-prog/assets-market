@@ -9,18 +9,9 @@ jobs:
         with: { distribution: temurin, java-version: '17' }
       - uses: subosito/flutter-action@v2
         with: { channel: stable, cache: true }
-      - name: Create project
-        run: |
-          mkdir -p /tmp/keep
-          cp pubspec.yaml /tmp/keep/pubspec.yaml
-          cp lib/main.dart /tmp/keep/main.dart
-          rm -rf pubspec.yaml lib
-          flutter create --platforms=android,web --org com.osama --project-name assets_market .
-          cp /tmp/keep/pubspec.yaml pubspec.yaml
-          cp /tmp/keep/main.dart lib/main.dart
-      - run: flutter pub get
+      - run: rm -rf pubspec.yaml lib
+      - run: flutter create --platforms=android --org com.osama --project-name assets_market .
       - run: flutter build apk --release
-      - run: flutter build web --release
       - uses: actions/upload-artifact@v4
         with:
           name: apk
